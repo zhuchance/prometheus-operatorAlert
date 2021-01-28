@@ -35,4 +35,4 @@ kubectl apply -f al-c1.yaml
 ## Community
 The prometheus-operatorAlert community is waiting for you participation!
 - Other issues please send email to [couchance@gmail.com](mailto:couchance@gmail.com)
-; #- 微信用户加 chancejohn ，请注明 prometheus-operatorAlert 和个人信息.
+<--!; #- 微信用户加 chancejohn ，请注明 prometheus-operatorAlert 和个人信息. -->
