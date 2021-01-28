@@ -1,0 +1,46 @@
+# prometheus-prometheus-c1.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    prometheus: k8s 
+  name: k8s
+  namespace: monitoring
+spec:
+  remoteWrite:
+    - url: http://10.192.253.24:8480/insert/24:24/prometheus
+      queueConfig:
+        maxSamplesPerSend: 10000
+  retention: 2h 
+  alerting:
+    alertmanagers:
+    - name: alertmanager-main
+      namespace: monitoring
+      port: web
+  image: quay.io/prometheus/prometheus:v2.20.0
+  nodeSelector:
+    beta.kubernetes.io/os: linux
+  podMonitorNamespaceSelector:
+    matchLabels:
+      monitoring-role: system 
+  podMonitorSelector: {}
+  replicas: 1 
+  resources:
+    requests:
+      memory: 400Mi
+    limits:
+      memory: 2Gi
+  ruleSelector:
+    matchLabels:
+      prometheus: system 
+      role: alert-rules
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector: 
+    matchLabels:
+      monitoring-role: system 
+  serviceMonitorSelector: {}
+  version: v2.20.0
