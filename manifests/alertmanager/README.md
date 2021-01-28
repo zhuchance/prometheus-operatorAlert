@@ -8,3 +8,5 @@ PrometheusAlert地址：
 
 https://github.com/feiyu563/PrometheusAlert/blob/master/example/kubernetes/PrometheusAlert-Deployment.yaml
 
+
+微信用户加 chancejohn ，请注明 prometheus-operatorAlert 和个人信息.
