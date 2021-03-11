@@ -37,7 +37,7 @@ stringData:
       - url: 'http://[172.29.18.13]:8080/prometheus/alert'
     - name: 'prometheusalert-weixin'
       webhook_configs:
-      - url: 'http://[172.29.18.13]:8080/prometheus/router?wxurl=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxx'
+      - url: 'http://172.29.64.5/'
     - name: 'prometheusalert-dingding'
       webhook_configs:
       - url: 'http://[172.29.18.13]:8080/prometheus/router?ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxxx'
