@@ -1,7 +1,12 @@
 # prometheus-operatorAlert
-kube-operator使用PrometheusAlertk、8s1.18-Prometheus-PrometheusAlert
+kube-operator使用PrometheusAlert、k8s1.18-Prometheus-PrometheusAlert
 
+## PrometheusAlert：
 
+https://github.com/feiyu563/PrometheusAlert/blob/master/example/kubernetes/PrometheusAlert-Deployment.yaml
+
+## kube-prometheus:
+https://github.com/prometheus-operator/kube-prometheus/archive/v0.6.0.tar.gz
 
 ## Compatibility
 
@@ -35,4 +40,4 @@ kubectl apply -f al-c1.yaml
 ## Community
 The prometheus-operatorAlert community is waiting for you participation!
 - Other issues please send email to [couchance@gmail.com](mailto:couchance@gmail.com)
-;- 微信用户加 chancejohn ，请注明 prometheus-operatorAlert 和个人信息.
+
