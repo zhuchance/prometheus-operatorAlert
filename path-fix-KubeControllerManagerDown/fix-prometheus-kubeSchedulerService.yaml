@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kube-system
+  name: kube-scheduler
+  labels:
+    k8s-app: kube-scheduler
+spec:
+  # #使用了selector不需要指定 endpoints
+  selector:
+    component: kube-scheduler
+  ports:
+  - name: http-metrics
+    port: 10251
+    targetPort: 10251
+    protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    k8s-app: kube-scheduler
+  name: kube-scheduler
+  namespace: kube-system
+subsets:
+  - addresses:
+      - ip: 172.29.0.2
+      - ip: 172.29.0.3
+      # - ip: 192.168.0.2
+      # - ip: 192.168.0.3
+    ports:
+    - name: http-metrics
+      port: 10251
+      protocol: TCP
+#####
+#ExecStart=/opt/kube/bin/kube-scheduler \
+#  --address=0.0.0.0 \
+

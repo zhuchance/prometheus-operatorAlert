@@ -34,17 +34,17 @@ stringData:
     receivers:
     - name: 'web.hook.prometheusalert'
       webhook_configs:
-      - url: 'http://[172.29.18.13]:8080/prometheus/alert'
+      - url: 'http://prometheus-alert-center:8080/prometheus/router?ddurl=https://wechat.xiaocaicai.com/send_message/send?chartroom=xxxxx'
     - name: 'prometheusalert-weixin'
       webhook_configs:
-      - url: 'http://172.29.64.5/'
+      - url: 'http://prometheus-alert-center:8080/prometheus/router?ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxxx'
     - name: 'prometheusalert-dingding'
       webhook_configs:
-      - url: 'http://[172.29.18.13]:8080/prometheus/router?ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxxx'
+      - url: 'http://prometheus-alert-center:8080/prometheus/router?ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxxx'
     - name: 'prometheusalert-feishu'
       webhook_configs:
-      - url: 'http://[172.29.18.13]:8080/prometheus/router?fsurl=https://open.feishu.cn/open-apis/bot/hook/xxxxxxxxx'
+      - url: 'http://prometheus-alert-center:8080/prometheus/router?fsurl=https://open.feishu.cn/open-apis/bot/hook/xxxxxxxxx'
     - name: 'prometheusalert-all'
       webhook_configs:
-      - url: 'http://[172.29.18.13]:8080/prometheus/router?wxurl=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxx&ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxxx&email=123@qq.com&phone=15395105573'
+      - url: 'http://prometheus-alert-center:8080/prometheus/router?wxurl=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxx&ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxxx&email=123@qq.com&phone=15395105573'
 type: Opaque
