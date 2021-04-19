@@ -4,9 +4,9 @@
 * This project integrates the codes of 3 warehouses to solve the IT operation and maintenance alarm push. The dev version realizes the personal Wechat push alarm message, and also supports email messages, corporate Wechat, Dingding and other push messages.
 
 ## Thanks for the project:
-kube-prometheus [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus)
-PrometheusAlert [PrometheusAlert](https://github.com/feiyu563/PrometheusAlert)
-wechat-bot [cixingguangming55555](http://127.0.0.1)
+* kube-prometheus [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus)
+* PrometheusAlert [PrometheusAlert](https://github.com/feiyu563/PrometheusAlert)
+* wechat-bot [cixingguangming55555](http://127.0.0.1)
 
 
 #### deploy

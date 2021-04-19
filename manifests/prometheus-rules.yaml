@@ -1175,7 +1175,7 @@ spec:
         runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubecontainerwaiting
       expr: |
         sum by (namespace, pod, container) (kube_pod_container_status_waiting_reason{job="kube-state-metrics"}) > 0
-      for: 1h
+      for: 3m
       labels:
         severity: warning
     - alert: KubeDaemonSetNotScheduled
@@ -1187,7 +1187,7 @@ spec:
         kube_daemonset_status_desired_number_scheduled{job="kube-state-metrics"}
           -
         kube_daemonset_status_current_number_scheduled{job="kube-state-metrics"} > 0
-      for: 10m
+      for: 5m
       labels:
         severity: warning
     - alert: KubeDaemonSetMisScheduled

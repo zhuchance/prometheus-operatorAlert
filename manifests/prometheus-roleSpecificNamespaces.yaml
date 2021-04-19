@@ -49,3 +49,22 @@ items:
     - list
     - watch
 kind: RoleList
+###
+apiVersion: rbac.authorization.k8s.io/v1
+items:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    name: prometheus-k8s
+    namespace: ingress-nginx
+  rules:
+  - apiGroups:
+    - ""
+    resources:
+    - services
+    - endpoints
+    - pods
+    verbs:
+    - get
+    - list
+    - watch
