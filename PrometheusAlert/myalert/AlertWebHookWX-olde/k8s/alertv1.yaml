@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertwx
+  namespace: monitoring
+  labels:
+    app: alertwx
+spec:
+  replicas: 1
+  # revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: alertwx
+  template:
+    metadata:
+      labels:
+        app: alertwx
+    spec:
+      containers:
+      - name: alertwx
+        image: alertv1:latest
+        imagePullPolicy: IfNotPresent
+        # lifecycle:
+        #   preStop:
+        #     exec:
+        #       command: ["sh","-c","sleep 5"]
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: 50m
+            memory: 40Mi
+          limits:
+            cpu: 50m
+            memory: 50Mi
+        volumeMounts:
+        - name: timezone
+          mountPath: /etc/localtime
+      imagePullSecrets:
+      - name: alertwx
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertwx-svc
+  namespace: monitoring
+spec:
+  ports:
+  - port: 80
+    # nodePort: 33016
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+  selector:
+    app: alertwx

@@ -1,0 +1,23 @@
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  name: alertmanager-main
+  namespace: monitoring
+stringData:
+  alertmanager.yaml: |
+    global:
+      resolve_timeout: 5m
+    
+    route:
+      group_by: ['alertname']
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 10m
+      receiver: 'webhook'
+    receivers:
+    - name: 'webhook'
+      webhook_configs:
+      - url: 'http://prometheus-alert-center.monitoring.svc.cluster.local:8080/'
+        send_resolved: true
+type: Opaque

@@ -1,0 +1,30 @@
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  name: alertmanager-main
+  namespace: monitoring
+stringData:
+  alertmanager.yaml: |
+    global:
+      resolve_timeout: 3m
+    route:
+      group_by: ['alertname','cluster','service']
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 10m
+      receiver: ['webhook','PrometheusAlert','email']
+    receivers:
+    - name: 'webhook'
+      webhook_configs:
+      - url: 'http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert?type=dd&tpl=prometheus-dd&ddurl=http://wechart-service.wechart.svc.cluster.local:8081/sendTextMsg'
+        send_resolved: true
+    - name: 'email'
+      webhook_configs:
+      - url: 'http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert?type=email&tpl=prometheus-email&email=18120100305@189.cn'
+        send_resolved: true
+     - name: 'PrometheusAlert'
+       webhook_configs:
+       - url: 'http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert'
+         send_resolved: true
+type: Opaque

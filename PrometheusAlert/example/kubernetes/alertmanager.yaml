@@ -1,0 +1,31 @@
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  name: alertmanager-main
+  namespace: monitoring
+stringData:
+  alertmanager.yaml: |
+    global:
+      resolve_timeout: 3m
+    
+    route:
+      group_by: ['alertname']
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 10m
+      receiver: 'webhook'
+    receivers:
+    - name: 'webhook'
+      webhook_configs:
+      - url: 'http://[prometheus-alert-center.monitoring.svc.cluster.local]:8080/prometheus/router?wxurl=https://wechat.xiaocaicai.com/send_message'
+        send_resolved: true
+    - name: 'webhookwx'
+      webhook_configs:
+      - url: 'http://[prometheus-alert-center.monitoring.svc.cluster.local]:8080/prometheus/router?fsurl=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=ae93ff29-f182-4c89-9719-0411354f112d'
+        send_resolved: true
+    - name: 'webhook-wechat'
+      webhook_configs:
+      - url: 'http://alertwx-svc/'
+        send_resolved: true
+type: Opaque

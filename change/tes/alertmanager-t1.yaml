@@ -1,0 +1,31 @@
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  name: alertmanager-main
+  namespace: monitoring
+stringData:
+  alertmanager.yaml: |
+    global:
+      resolve_timeout: 3m
+      http_config: {}
+      smtp_hello: localhost
+      smtp_require_tls: true
+      pagerduty_url: https://events.pagerduty.com/v2/enqueue
+      opsgenie_api_url: https://api.opsgenie.com/
+      wechat_api_url: https://qyapi.weixin.qq.com/cgi-bin/
+      victorops_api_url: https://alert.victorops.com/integrations/generic/20131114/alert/
+    route:
+      receiver: PrometheusAlert
+      group_by:
+      - instance
+      group_wait: 5m
+      group_interval: 5s
+      repeat_interval: 5m
+    receivers:
+    - name: PrometheusAlert
+      webhook_configs:
+      - send_resolved: true
+        http_config: {}
+        url: http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert?type=fs&tpl=prometheus-fs&fsurl=https://wechat.me.com/send_message
+        max_alerts: 0

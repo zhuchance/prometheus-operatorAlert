@@ -7,14 +7,13 @@ metadata:
 stringData:
   alertmanager.yaml: |
     global:
-      resolve_timeout: 5m
-    
+      resolve_timeout: 3m
     route:
-      group_by: ['alertname']
+      group_by: ['alertname','cluster','service']
       group_wait: 10s
       group_interval: 10s
       repeat_interval: 10m
-      receiver: 'webhook'
+      receiver: ['webhook','PrometheusAlert','email','feishu']
     receivers:
     - name: 'webhook'
       webhook_configs:
@@ -24,4 +23,12 @@ stringData:
       webhook_configs:
       - url: 'http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert?type=email&tpl=prometheus-email&email=18120100305@189.cn'
         send_resolved: true
+     - name: 'PrometheusAlert'
+       webhook_configs:
+       - url: 'http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert'
+         send_resolved: true
+     - name: 'feishu'
+       webhook_configs:
+       - url: 'http://[prometheus-alert-center.wechart.svc.cluster.local]:8080/prometheusalert?type=fs&tpl=prometheus-fs&fsurl=https://wechat.xiaocaicai.com/send_message'
+         send_resolved: true
 type: Opaque
