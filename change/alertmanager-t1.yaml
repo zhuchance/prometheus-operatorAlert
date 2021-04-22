@@ -4,6 +4,7 @@ kind: Secret
 metadata:
   name: alertmanager-main
   namespace: monitoring
+  ## curl -X POST http://IP/-/reload #reload alertmanager配置
 stringData:
   alertmanager.yaml: |
     global:
